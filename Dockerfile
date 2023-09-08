@@ -1,19 +1,46 @@
 # Getting a base image from Ubuntu
 FROM ubuntu
 ENV DEBIAN_FRONTEND=noninteractive
+SHELL ["/bin/bash", "-c"]
 LABEL maintainer="Joe Shaffer <jshaffer@kansascity.edu>"
 
 #Update apt-get
 RUN apt-get update && apt-get upgrade -y
 
 # Install required dependencies
-RUN apt-get -f install -y --fix-missing git wget tcsh build-essential gfortran libblas-dev liblapack-dev zlib1g-dev libxmu-dev libxi-dev libxt-dev libx11-dev libglu1-mesa-dev gcc-4.8 g++ gfortran language-pack-en
-
-
-RUN apt-get -f install -y --fix-missing gettext xterm x11-apps csh file bc xorg xorg-dev xserver-xorg-video-intel libncurses5 libegl1 libglib2.0-0 libjpeg62 libwayland-client0 libwayland-cursor0
-
-
-RUN apt-get -f install -y --fix-missing libxcb-icccm4 \
+RUN apt-get -f install -y --fix-missing git \
+    wget \
+    tcsh \
+    build-essential \
+    gfortran \
+    libblas-dev \
+    liblapack-dev \
+    zlib1g-dev \
+    libxmu-dev \
+    libxi-dev \
+    libxt-dev \
+    libx11-dev \
+    libglu1-mesa-dev \
+    gcc-4.8 \
+    g++ \
+    gfortran \
+    language-pack-en \
+    gettext \
+    xterm \
+    x11-apps \
+    csh \
+    file \
+    bc \
+    xorg \
+    xorg-dev \
+    xserver-xorg-video-intel \
+    libncurses5 \
+    libegl1 \
+    libglib2.0-0 \
+    libjpeg62 \
+    libwayland-client0 \
+    libwayland-cursor0 \
+    libxcb-icccm4 \
     libxcb-image0 \
     libxcb-keysyms1 \
     libxcb-randr0 \
@@ -46,16 +73,10 @@ RUN rm freesurfer.deb
 ENV FREESURFER_HOME=/usr/local/freesurfer/7.4.0
 ENV PATH=$PATH:$FREESURFER_HOME/bin
 
-# Create input and output directories
-#RUN mkdir -p /data/input /data/output
-
-# Copy the process_brain.py script to the container
-#COPY process_brain.py /app/process_brain.py
+#Copy FreeSurfer License File to install directory
+COPY license.txt $FREESURFER_HOME
 
 # Set the working directory
-#WORKDIR /app
+WORKDIR /
 
-# Define input and output volumes
-#VOLUME /data/input
-#VOLUME /data/output
 
