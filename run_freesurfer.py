@@ -56,8 +56,10 @@ N_CONTAINERS=1
 IMAGE_NAME="freesurfer"
     
 #Script
-df = pd.read_excel("C:\\Users\\JShaffer.KCUMB\\Documents\\Research\\test_data\\participant_paths.xlsx")
+#df = pd.read_excel("C:\\Users\\JShaffer.KCUMB\\Documents\\Research\\test_data\\participant_paths.xlsx")
 #df = pd.read_excel('D:\\BD_NDA\\participant_paths.xlsx')
+
+#info = subprocess.run("docker info", capture_output=True, universal_newlines=True)
 
 
 
