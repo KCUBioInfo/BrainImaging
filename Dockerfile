@@ -5,7 +5,8 @@ SHELL ["/bin/bash", "-c"]
 LABEL maintainer="Joe Shaffer <jshaffer@kansascity.edu>"
 
 #Update apt-get
-RUN apt-get update && apt-get upgrade -y
+RUN apt-get update --fix-missing
+RUN apt-get upgrade -y
 
 # Install required dependencies
 RUN apt-get -f install -y --fix-missing git \
