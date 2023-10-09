@@ -25,13 +25,14 @@ def run_subject(subj_id, container_name, t1_path, t2_path = ''):
    
     #Configure FreeSurfer Subject Directory
 
+    if t1_path != '':
     #If T2 file is available, run with T2 file
-    if t2_path != '':
-        command_string = f"docker exec -d {container_name} recon-all -all -subject {subj_id} -i {t1_path} -T2 {t2_path} -T2pial"
-    else:
-        command_string = f"docker exec -d {container_name} recon-all -all -subject {subj_id} -i {t1_path}"
-    print(command_string)    
-    p = subprocess.run(command_string, capture_output = True, universal_newlines=True)
+        if t2_path != '':
+            command_string = f"docker exec -d {container_name} recon-all -all -subject {subj_id} -i {t1_path} -T2 {t2_path} -T2pial"
+        else:
+            command_string = f"docker exec -d {container_name} recon-all -all -subject {subj_id} -i {t1_path}"
+        print(command_string)    
+        p = subprocess.run(command_string, capture_output = True, universal_newlines=True)
     #print(p)
     
     #with open(subj_id + '_stdout.txt', 'w') as f:
@@ -60,14 +61,17 @@ HOST_DATA_PATH="D:\\" #Path to shared directory on host machine - lab desktops
 SUBJECTS_DIR="/data/derivatives/Freesurfer" #Must be full path to data within container
 CONTAINER_DATA_PATH="/data"     #Path to place share relative to within container
 CONTAINER_NAME_PREFIX="freesurfer"
-N_CONTAINERS=160
-START_INDEX=80
+N_CONTAINERS=80
+START_INDEX=0
 #START_INDEX=160
 IMAGE_NAME="freesurfer"
     
 #Script
 #df = pd.read_excel("C:\\Users\\JShaffer.KCUMB\\Documents\\Research\\test_data\\participant_paths.xlsx")
-df = pd.read_excel('D:\\BD_NDA\\1218563_participant_image_paths.xlsx')
+#df = pd.read_excel('D:\\BD_NDA\\1218563_participant_image_paths.xlsx')
+df = pd.read_excel('D:\\BD_NDA\\1218615_participant_image_paths.xlsx')
+#df = pd.read_excel('D:\\BD_NDA\\1218611_participant_image_paths.xlsx')
+#df = pd.read_excel('D:\\BD_NDA\\1220664_participant_image_paths.xlsx')
 
 for i,v in enumerate(df.index[START_INDEX:START_INDEX + N_CONTAINERS]):
     
