@@ -62,7 +62,7 @@ SUBJECTS_DIR="/data/derivatives/Freesurfer" #Must be full path to data within co
 CONTAINER_DATA_PATH="/data"     #Path to place share relative to within container
 CONTAINER_NAME_PREFIX="freesurfer"
 N_CONTAINERS=80
-START_INDEX=0
+START_INDEX=80
 #START_INDEX=160
 IMAGE_NAME="freesurfer"
     
